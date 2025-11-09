@@ -1,29 +1,24 @@
 <?php
-// db.php — database connection using PDO (MySQL)
+// api/db.php
+declare(strict_types=1);
 
-// database credentials
-$host = 'localhost';      // usually 'localhost' when using phpMyAdmin locally
-$dbname = 'todo_app';     // same name as in your init.sql
-$username = 'root';       // default in XAMPP/MAMP/WAMP (you can change if needed)
-$password = '';           // leave empty if you didn’t set one in phpMyAdmin
+$DB_HOST = '127.0.0.1';
+$DB_NAME = 'whendoodoo';
+$DB_USER = 'seu_usuario';
+$DB_PASS = 'sua_senha';
+$DB_CHAR = 'utf8mb4';
 
-// optional: better error handling and defaults
+$dsn = "mysql:host=$DB_HOST;dbname=$DB_NAME;charset=$DB_CHAR";
+
 $options = [
-    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION, // throw exceptions on errors
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,       // fetch results as associative arrays
-    PDO::ATTR_EMULATE_PREPARES   => false,                  // use real prepared statements
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
 ];
 
 try {
-    $pdo = new PDO(
-        "mysql:host=$host;dbname=$dbname;charset=utf8mb4",
-        $username,
-        $password,
-        $options
-    );
+    $pdo = new PDO($dsn, $DB_USER, $DB_PASS, $options);
 } catch (PDOException $e) {
-    // if connection fails, show a clean error (useful during dev)
     http_response_code(500);
-    echo json_encode(['error' => 'Database connection failed: ' . $e->getMessage()]);
+    echo json_encode(['error' => 'DB connection failed']);
     exit;
 }
