@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Todo App — Simple</title>
+  <style>
+    /* minimal, clean layout */
+    :root { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; color-scheme: light; }
+    body { max-width: 900px; margin: 32px auto; padding: 0 16px; }
+    header { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; }
+    h1 { font-size:1.4rem; margin:0; }
+    .card { background:#fff; border:1px solid #e6e6e6; padding:16px; border-radius:8px; box-shadow:0 1px 2px rgba(0,0,0,0.03); }
+    .row { display:flex; gap:8px; align-items:center; }
+    input, select, button, textarea { font:inherit; padding:8px 10px; border:1px solid #ddd; border-radius:6px; }
+    button { cursor:pointer; background:#0b66ff; color:white; border:none; }
+    button.ghost { background:transparent; color:#0b66ff; border:1px solid #0b66ff; }
+    .users { width:360px; }
+    .left { flex:1; }
+    .todos { margin-top:16px; }
+    .todo { display:flex; align-items:flex-start; gap:12px; padding:10px; border-bottom:1px solid #f2f2f2; }
+    .todo:last-child { border-bottom: none; }
+    .todo .title { font-weight:600; }
+    .todo .notes { color:#666; margin-top:4px; font-size:.95rem; }
+    .todo-actions { margin-left:auto; display:flex; gap:8px; }
+    .small { font-size:.85rem; padding:6px 8px; border-radius:6px; }
+    .done { text-decoration:line-through; color:#888; opacity:0.9; }
+    .meta { font-size:.85rem; color:#666; margin-top:6px; }
+    .hidden { display:none; }
+    .status { margin-top:12px; color:#cc0000; }
+    @media (max-width:640px){ .row{flex-direction:column; align-items:stretch} .users{width:100%} .todo{flex-direction:column; align-items:flex-start} .todo-actions{width:100%; justify-content:flex-end} }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Todo App — Simple</h1>
+      <div class="meta">Sem autenticação — teste local com phpMyAdmin/MySQL</div>
+    </div>
+
+    <div class="card users">
+      <div style="display:flex; gap:8px; align-items:center;">
+        <select id="userSelect" style="flex:1">
+          <option value="">— Select user —</option>
+        </select>
+        <button id="refreshUsers" title="Refresh users" class="ghost small">Refresh</button>
+      </div>
+
+      <form id="createUserForm" style="margin-top:10px; display:flex; gap:8px;">
+        <input name="name" placeholder="Name" required />
+        <input name="email" placeholder="Email" />
+        <button type="submit" class="small">Add</button>
+      </form>
+    </div>
+  </header>
+
+  <main>
+    <div class="card left">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="margin:0">Todos</h2>
+        <div id="currentUserLabel" style="color:#666">No user selected</div>
+      </div>
+
+      <form id="createTodoForm" style="margin-top:12px; display:flex; gap:8px; align-items:flex-start;">
+        <input name="title" placeholder="New todo title" required style="flex:1" />
+        <input name="due_at" placeholder="Due (YYYY-MM-DD HH:MM)" style="width:160px" />
+        <button type="submit">Add</button>
+      </form>
+
+      <div id="todos" class="todos" style="margin-top:14px">
+        <!-- todo items injected here -->
+      </div>
+
+      <div id="status" class="status"></div>
+    </div>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
