@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>WhenDooDoo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body{font-family:system-ui,Arial;margin:0;padding:1rem;background:#f6f7fb}
+    .app{max-width:720px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between}
+    input, textarea{width:100%;padding:.5rem;margin:.25rem 0;border:1px solid #ddd;border-radius:6px}
+    .todo{background:white;padding:.6rem;border-radius:8px;margin:.6rem 0;display:flex;align-items:center;justify-content:space-between}
+    .left{display:flex;gap:.6rem;align-items:center}
+    .done{text-decoration:line-through;color:#888}
+    button{padding:.4rem .6rem;border:0;background:#0366d6;color:white;border-radius:6px;cursor:pointer}
+    .btn-ghost{background:transparent;color:#0366d6;border:1px solid #0366d6}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>WhenDooDoo</h1>
+      <button id="clearAll" class="btn-ghost">Clear session todos</button>
+    </header>
+
+    <section id="create">
+      <input id="title" placeholder="New todo title" />
+      <textarea id="notes" placeholder="Notes (optional)" rows="2"></textarea>
+      <button id="createBtn">Add</button>
+    </section>
+
+    <section id="list"></section>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
